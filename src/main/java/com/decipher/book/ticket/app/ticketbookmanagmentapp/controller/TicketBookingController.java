@@ -14,6 +14,7 @@ public class TicketBookingController {
 
     @PostMapping(value = "/createTicket")
     public Ticket createTicket(@RequestBody Ticket ticket)
+
     {
         return ticketBookingService.createTicket(ticket);
     }
@@ -23,5 +24,23 @@ public class TicketBookingController {
     {
        return ticketBookingService.getTicketById(ticketId);
     }
+
+    @GetMapping(value = "/alltickets")
+    public Iterable<Ticket> getAllTickets()
+    {
+        return ticketBookingService.getAllTickets();
+    }
+
+    @DeleteMapping(value = "/deleteTicket/{ticketId}")
+    public void deleteTicket(@PathVariable("ticketId")Integer ticketId) {
+        ticketBookingService.deleteTicket(ticketId);
+    }
+    @PutMapping(value = "/updateTicket/{ticketId}/{newEmail}")
+    public Ticket updateTicket(@PathVariable("ticketId")Integer ticketId, @PathVariable("newEmail") String newEmail)
+    {
+        return ticketBookingService.updateTicket(ticketId,newEmail);
+    }
+
+
 
 }
