@@ -5,6 +5,9 @@ import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TicketBookingService {
 
@@ -36,6 +39,17 @@ public class TicketBookingService {
          ticketFromDb.setEmail(newEmail); // set value of new email in email field
         return ticketBookingDao.save(ticketFromDb); //updating new email in Database
 
+    }
+
+    public Iterable<Ticket> ticketsByDestStation(String destStation)
+    {
+        return ticketBookingDao.findByDestStation(destStation);
+    }
+
+    public Iterable<Ticket> ticketsBetweenStation(String sourceStation, String destStation) {
+
+
+        return ticketBookingDao.findTicketsBetweenStation(sourceStation,destStation);
     }
 }
 

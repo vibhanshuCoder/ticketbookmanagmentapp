@@ -5,6 +5,8 @@ import com.decipher.book.ticket.app.ticketbookmanagmentapp.service.TicketBooking
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/tickets")
 public class TicketBookingController {
@@ -35,12 +37,23 @@ public class TicketBookingController {
     public void deleteTicket(@PathVariable("ticketId")Integer ticketId) {
         ticketBookingService.deleteTicket(ticketId);
     }
+
     @PutMapping(value = "/updateTicket/{ticketId}/{newEmail}")
     public Ticket updateTicket(@PathVariable("ticketId")Integer ticketId, @PathVariable("newEmail") String newEmail)
     {
         return ticketBookingService.updateTicket(ticketId,newEmail);
     }
 
+    @GetMapping(value = "/ticketsByDestStation/{destStation}")
+    public Iterable<Ticket> ticketsByDestStation(@PathVariable("destStation") String destStation)
+    {
+        return ticketBookingService.ticketsByDestStation(destStation);
+    }
 
+    @GetMapping(value ="/ticketsBetweenStation",params = {"sourceStation","destStation"})
+    public Iterable<Ticket> ticketsBetweenStation(@RequestParam("sourceStation")String sourceStation,@RequestParam("destStation")String destStation)
+    {
+        return ticketBookingService.ticketsBetweenStation(sourceStation,destStation);
+    }
 
 }
