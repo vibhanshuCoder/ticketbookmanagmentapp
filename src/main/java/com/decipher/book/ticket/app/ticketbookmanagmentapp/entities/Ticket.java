@@ -1,4 +1,5 @@
 package com.decipher.book.ticket.app.ticketbookmanagmentapp.entities;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -24,6 +25,9 @@ public class Ticket {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "date_created")
+    private LocalDateTime dateCreated = LocalDateTime.now();
 
     public Integer getTicketId() {
         return ticketId;
@@ -71,5 +75,25 @@ public class Ticket {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketId=" + ticketId +
+                ", passengername='" + passengername + '\'' +
+                ", bookingDate=" + bookingDate +
+                ", sourceStation='" + sourceStation + '\'' +
+                ", destStation='" + destStation + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

@@ -1,10 +1,13 @@
 package com.decipher.book.ticket.app.ticketbookmanagmentapp.controller;
 
+import com.decipher.book.ticket.app.ticketbookmanagmentapp.DTO.TicketDOT;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
+import com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass.JsonResponse;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.service.TicketBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,7 +19,6 @@ public class TicketBookingController {
 
     @PostMapping(value = "/createTicket")
     public Ticket createTicket(@RequestBody Ticket ticket)
-
     {
         return ticketBookingService.createTicket(ticket);
     }
@@ -34,7 +36,8 @@ public class TicketBookingController {
     }
 
     @DeleteMapping(value = "/deleteTicket/{ticketId}")
-    public void deleteTicket(@PathVariable("ticketId")Integer ticketId) {
+    public void deleteTicket(@PathVariable("ticketId")Integer ticketId)
+    {
         ticketBookingService.deleteTicket(ticketId);
     }
 
@@ -55,5 +58,21 @@ public class TicketBookingController {
     {
         return ticketBookingService.ticketsBetweenStation(sourceStation,destStation);
     }
+    /*
+    @GetMapping(value = "/favplace")
+    public String favPlace()
+    {
+        return ticketBookingService.favPlace();
+    }*/
+    @GetMapping(value = "/favplace")
+    public JsonResponse favPlace()
+    {
+        return ticketBookingService.favPlace();
+    }
 
+    @GetMapping(value = "/ticketsbymonth/{bookingDate}")
+    public List<TicketDOT> bookedTickectOnMonth(@PathVariable("bookingDate")int bookingDate)
+    {
+        return ticketBookingService.bookedTicketOnMonth(bookingDate);
+    }
 }
