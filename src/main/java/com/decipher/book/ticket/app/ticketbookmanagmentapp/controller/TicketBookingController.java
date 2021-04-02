@@ -5,9 +5,9 @@ import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass.JsonResponse;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.service.TicketBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,6 +16,9 @@ public class TicketBookingController {
 
     @Autowired
     private TicketBookingService ticketBookingService;
+    private Integer pageNo;
+    private Integer pageSize;
+    private String sortby;
 
     @PostMapping(value = "/createTicket")
     public Ticket createTicket(@RequestBody Ticket ticket)
@@ -58,21 +61,23 @@ public class TicketBookingController {
     {
         return ticketBookingService.ticketsBetweenStation(sourceStation,destStation);
     }
-    /*
-    @GetMapping(value = "/favplace")
-    public String favPlace()
-    {
-        return ticketBookingService.favPlace();
-    }*/
+
     @GetMapping(value = "/favplace")
     public JsonResponse favPlace()
     {
         return ticketBookingService.favPlace();
     }
 
-    @GetMapping(value = "/ticketsbymonth/{bookingDate}")
+    @GetMapping(value = "/ticketsbymonth/{bookingDate}}")
     public List<TicketDOT> bookedTickectOnMonth(@PathVariable("bookingDate")int bookingDate)
     {
         return ticketBookingService.bookedTicketOnMonth(bookingDate);
+    }
+
+    @GetMapping(value ="/tickets",params = {"pageNo","pageSize","sortby"})
+    public List<Ticket> pagedTickets(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam("sortby") String sortby)
+    {
+        return ticketBookingService.pagedTickets(pageNo,pageSize,sortby);
+//        return ticketBookingService.pagedTickets(pageNo,pageSize);
     }
 }

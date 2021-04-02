@@ -4,17 +4,17 @@ import com.decipher.book.ticket.app.ticketbookmanagmentapp.DTO.TicketDOT;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.dao.TicketBookingDao;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass.JsonResponse;
+import com.decipher.book.ticket.app.ticketbookmanagmentapp.pager.TicketPager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class TicketBookingService {
-
-
 
     @Autowired
     private TicketBookingDao ticketBookingDao;
@@ -76,6 +76,12 @@ public class TicketBookingService {
         }
 
         return dotList;
+    }
+
+    public List<Ticket> pagedTickets(Integer pageNo,Integer pageSize,String sortby)
+    {
+        return ticketBookingDao.findAllTickets(PageRequest.of(pageNo,pageSize, Sort.by(sortby).descending()));
+
     }
 }
 
