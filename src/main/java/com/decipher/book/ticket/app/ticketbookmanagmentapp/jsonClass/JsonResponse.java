@@ -1,8 +1,4 @@
-package com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass;
-
-import com.decipher.book.ticket.app.ticketbookmanagmentapp.dao.TicketBookingDao;
-import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.decipher.book.ticket.app.ticketbookmanagmentapp.jsonClass;
 
 
 public class JsonResponse

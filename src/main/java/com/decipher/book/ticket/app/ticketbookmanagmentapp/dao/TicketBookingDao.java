@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Repository
 public interface TicketBookingDao extends CrudRepository<Ticket, Integer>
@@ -25,16 +27,17 @@ public interface TicketBookingDao extends CrudRepository<Ticket, Integer>
    */
     Iterable<Ticket> findByDestStation(String destStation);
 
-    @Query(value = "SELECT * FROM ticket WHERE source_station =:sourceStation AND dest_station =:destStation", nativeQuery = true)
-    Iterable<Ticket> findTicketsBetweenStation(String sourceStation, String destStation);
+    @Query(value = "FROM Ticket t WHERE t.sourceStation =:sourceStation AND t.destStation =:destStation")
+    Iterable<Ticket> findTicketsBetweenStation(@Param("sourceStation") String sourceStation,@Param("destStation") String destStation);
 
     @Query(value = "SELECT dest_station FROM ticket GROUP BY dest_station ORDER BY COUNT(dest_station) DESC LIMIT 1",nativeQuery = true)
     String findMostVisitedPlace();
-
+//                                                      -- parameterised qurey type " ?1 " --
     @Query(value = "select * from ticket where month(booking_date) =?1",nativeQuery = true)
-    Iterable<Ticket> findTicketsByMonth(Integer bookingmont);
+    Iterable<Ticket> findTicketsByMonth(Integer bookingmonth);
 
     @Query(value = "select * from ticket", nativeQuery = true)
     Page<Ticket> findAllTickets(Pageable pageable);
+
 
 }

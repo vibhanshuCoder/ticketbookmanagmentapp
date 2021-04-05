@@ -2,11 +2,10 @@ package com.decipher.book.ticket.app.ticketbookmanagmentapp.controller;
 
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.DTO.TicketDOT;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
-import com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass.JsonResponse;
+import com.decipher.book.ticket.app.ticketbookmanagmentapp.jsonClass.JsonResponse;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.service.TicketBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +26,8 @@ public class TicketBookingController {
         return ticketBookingService.createTicket(ticket);
     }
 
-    @GetMapping(value = "/ticket/{ticketId}")
-    public Ticket getTicketById(@PathVariable("ticketId") Integer ticketId)
+    @GetMapping(value = "/ticket",params = {"ticketId"})
+    public Ticket getTicketById(@RequestParam("ticketId") Integer ticketId)
     {
        return ticketBookingService.getTicketById(ticketId);
     }
@@ -78,8 +77,8 @@ public class TicketBookingController {
     @GetMapping(value ="/tickets",params = {"pageNo","pageSize","sortby"})
     public Page<Ticket> pagedTickets(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("sortby") String sortby)
     {
-
-       return ticketBookingService.pagedTickets(pageNo,pageSize,sortby);
-//        return ticketBookingService.pagedTickets(pageNo,pageSize);
+        return ticketBookingService.pagedTickets(pageNo,pageSize,sortby);
     }
+
+
 }
