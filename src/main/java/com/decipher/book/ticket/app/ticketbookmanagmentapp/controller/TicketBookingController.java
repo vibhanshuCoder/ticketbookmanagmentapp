@@ -5,6 +5,7 @@ import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass.JsonResponse;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.service.TicketBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,7 +76,7 @@ public class TicketBookingController {
     }
 
     @GetMapping(value ="/tickets",params = {"pageNo","pageSize","sortby"})
-    public List<Ticket> pagedTickets(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("sortby") String sortby)
+    public Page<Ticket> pagedTickets(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("sortby") String sortby)
     {
 
        return ticketBookingService.pagedTickets(pageNo,pageSize,sortby);

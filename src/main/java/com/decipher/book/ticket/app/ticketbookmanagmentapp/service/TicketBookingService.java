@@ -6,6 +6,7 @@ import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.jasonClass.JsonResponse;
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.pager.TicketPager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -79,10 +80,10 @@ public class TicketBookingService {
         return dotList;
     }
 
-    public List<Ticket> pagedTickets(Integer pageNo, Integer pageSize, String sortby)
+    public Page<Ticket> pagedTickets(Integer pageNo, Integer pageSize, String sortby)
     {
         String[] inp = sortby.split("\\,");
-        List<Ticket> sorted = ticketBookingDao.findAllTickets(PageRequest.of(pageNo, pageSize, Sort.by(inp).ascending()));
+        Page<Ticket> sorted = ticketBookingDao.findAllTickets(PageRequest.of(pageNo, pageSize, Sort.by(inp).ascending()));
         return sorted;
     }
 }

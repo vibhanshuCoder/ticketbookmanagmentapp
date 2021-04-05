@@ -35,6 +35,6 @@ public interface TicketBookingDao extends CrudRepository<Ticket, Integer>
     Iterable<Ticket> findTicketsByMonth(Integer bookingmont);
 
     @Query(value = "select * from ticket", nativeQuery = true)
-    List<Ticket> findAllTickets(Pageable pageable);
+    Page<Ticket> findAllTickets(Pageable pageable);
 
 }
