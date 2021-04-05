@@ -15,7 +15,7 @@ public class Ticket {
     private String passengername;
 
     @Column(name = "booking_date")
-    private Date bookingDate;
+    private  Date bookingDate;
 
     @Column(name = "source_station")
     private String sourceStation;

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -78,10 +79,11 @@ public class TicketBookingService {
         return dotList;
     }
 
-    public List<Ticket> pagedTickets(Integer pageNo,Integer pageSize,String sortby)
+    public List<Ticket> pagedTickets(Integer pageNo, Integer pageSize, String sortby)
     {
-        return ticketBookingDao.findAllTickets(PageRequest.of(pageNo,pageSize, Sort.by(sortby).descending()));
-
+        String[] inp = sortby.split("\\,");
+        List<Ticket> sorted = ticketBookingDao.findAllTickets(PageRequest.of(pageNo, pageSize, Sort.by(inp).ascending()));
+        return sorted;
     }
 }
 

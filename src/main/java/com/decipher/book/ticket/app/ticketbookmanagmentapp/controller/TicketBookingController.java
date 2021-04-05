@@ -75,9 +75,10 @@ public class TicketBookingController {
     }
 
     @GetMapping(value ="/tickets",params = {"pageNo","pageSize","sortby"})
-    public List<Ticket> pagedTickets(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam("sortby") String sortby)
+    public List<Ticket> pagedTickets(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("sortby") String sortby)
     {
-        return ticketBookingService.pagedTickets(pageNo,pageSize,sortby);
+
+       return ticketBookingService.pagedTickets(pageNo,pageSize,sortby);
 //        return ticketBookingService.pagedTickets(pageNo,pageSize);
     }
 }
