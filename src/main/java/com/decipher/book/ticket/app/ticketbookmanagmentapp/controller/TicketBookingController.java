@@ -16,9 +16,7 @@ public class TicketBookingController {
 
     @Autowired
     private TicketBookingService ticketBookingService;
-    private Integer pageNo;
-    private Integer pageSize;
-    private String sortby;
+
 
     @PostMapping(value = "/createTicket")
     public Ticket createTicket(@RequestBody Ticket ticket)

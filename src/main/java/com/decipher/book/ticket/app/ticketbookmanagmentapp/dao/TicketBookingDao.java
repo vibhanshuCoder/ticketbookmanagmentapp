@@ -2,25 +2,15 @@ package com.decipher.book.ticket.app.ticketbookmanagmentapp.dao;
 
 import com.decipher.book.ticket.app.ticketbookmanagmentapp.entities.Ticket;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
-
 import org.springframework.data.repository.query.Param;
-
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
-@Repository
 public interface TicketBookingDao extends CrudRepository<Ticket, Integer>
 {
-//    DAO(Data access object) generic API(Application programming Interface) use to access data from databases.
-
+    /*
+ DAO(Data access object) generic API(Application programming Interface) use to access data from databases.
+ */
     /*
     Native query refers to actual sql queries (referring to actual database objects) for study purpose only
    @Query(value = "SELECT * FROM ticket WHERE dest_station =:destStation", nativeQuery = true)
